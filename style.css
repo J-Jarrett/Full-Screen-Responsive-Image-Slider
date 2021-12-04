@@ -1,0 +1,114 @@
+/* 1. import font, add font-family to body, reset root levels. */
+/* 2. add a bit more styling to body (bg dark, text white, line height)
+    3.  then style container class slider 
+    4. then style slide class and give it a transition from transparent to opaque*/
+/* 5. Add the images: 
+    - paste these in at the bottom of the css, using the .slide class and the pseudo-selectors first-child and nth-child(),
+    - set images to cover whole/as much as poss of background,
+    - whichever html element .slide contains class .current will display
+ */
+/* 6. Style  .slide.content */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* reset root levels */
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    /* 2. add a bit more styling to body (bg dark, text white, line height) */
+    background-color: #333;
+    color: #fff;
+    line-height: 1.6;
+}
+
+/* 3.  then style container class slider  */
+.slider {
+    /* make position relative so we can position stuff inside the slider; 
+    set overflow to hidden, so no scroll bars;
+    make height & width entire viewport */
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    /* opacity: 0; */
+}
+
+/* 4. then style slide class and give .slide.current a transition from transparent to opaque:
+    - we want the slide to overlay the whole .slider, so position it absolute within the slider at top 0, left 0, & span 100% of width and height.
+    - we want this to be completely transparent, then use .slide.current to toggle visibility, so set opacity to 0 so it can be changed as needed*/
+.slide {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out; 
+}
+
+.slide.current {
+    opacity: 1;
+}
+
+/* 5. Add the images: 
+    - paste these in at the bottom of the css, using the .slide class and the pseudo-selectors first-child and nth-child(),
+    - set images to cover whole/as much as poss of background
+*/
+/* Background images: */
+.slide:first-child {
+    background: url("./images/EgretinMaiPoTheG220421.jpg") no-repeat center center/cover;
+}
+.slide:nth-child(2) {
+    background: url("./images/GoslingsCanaryWharf.jpg") no-repeat center center/cover;
+}
+.slide:nth-child(3) {
+    background: url("./images/GreyWolfWisconsinTheG28Jul21.jpg") no-repeat center center/cover;
+}
+.slide:nth-child(4) {
+    background: url("./images/PortVictoriaSA.jpg") no-repeat center center/cover;
+}
+.slide:nth-child(5) {
+    background: url("./images/swan_wings_water.jpg") no-repeat center center/cover;
+}
+.slide:nth-child(6) {
+    background: url("./images/WistmansWoodDartmoor.jpg") no-repeat center center/cover;
+}
+
+/* 6. Style  .slide.content*/
+/*  Intent: want this text box to be at the bottom of the page, and slide in from off screen left to right, starting invisible, opacity 0, and only be visible, opacity 1, if the .slide also has a .current.
+ */
+/* Method:
+    Position aboslute within slider, 70px from bottom of screen. If 600px wide, starts from -600px (this will take it off screen, so set left to 0 to work on styling first. 
+    Give it a bg col & text col, some pad, bit of marg under header.
+    Then change left to -600px & opacity to 0, invisible.
+=========
+    Need to add another style, .slide.current.content to:
+    - set opacity back to 1, visible;
+    - use transform to reposition it 600px left to right;
+    - write a transition function to slide in & become visible/opacity:1 over 0.7s,
+    - set a small delay before this happens, so we get the image first, then the .content sliding in.
+=========
+TEST by changing class .current to other slide divs to check.
+*/
+.slide .content {
+    position: absolute;
+    bottom: 70px;
+    left: -600px;
+    opacity: 1;
+    width: 600px;
+    background-color: rgba(255,255,255,0.8);
+    color: #333;
+    padding: 35px;
+}
+.slide .content h1 {
+    margin-bottom: 10px;
+}
+.slide.current .content {
+    opacity: 1;
+    transform: translateX(600px);
+    transition: all 0.7s ease-in-out 0.3s;
+}
