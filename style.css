@@ -8,6 +8,13 @@
     - whichever html element .slide contains class .current will display
  */
 /* 6. Style  .slide.content */
+/* 7. Style buttons */
+
+/* =============================== */
+
+/* Now it looks pretty. 
+    We're going to add media queries a bit later, but for now let's got to JS and deal with the functionality: clicking through the slides, setting up auto slide show, etc. */
+
 
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
@@ -112,3 +119,43 @@ TEST by changing class .current to other slide divs to check.
     transform: translateX(600px);
     transition: all 0.7s ease-in-out 0.3s;
 }
+/* Same side note as for button styling here: .slide .current didnt work, needs to be closed up */
+
+/* 7. Style buttons */
+/* Right now our buttons are tiny and hidden away at the bottom of the page.
+    - Need to place them half way down screen, offset from each edge.
+    - Give them a white circle border, transparent bg, padding, color white, 
+    - Make cursor a pointer
+    - get rid of the 'blue box' outline when cursor is on them
+    - give them a hover state: makes bg white and color (arrow) dark grey.    
+*/
+.buttons button#next {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+}
+.buttons button#prev {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+}
+/* NOTE: originally styled as  .buttons button #next {} and .buttons button #prev {}
+and IT DIDN'T WORK - deleted space between button and #next, now it does
+*/
+.buttons button {
+    border: 2px solid #fff;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    padding: 13px 15px;
+    border-radius: 50%;
+    outline: none;
+}
+.buttons button:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Now it looks pretty. 
+    We're going to add media queries a bit later, but for now let's got to JS and deal with the functionality: clicking through the slides, setting up auto slide show, etc. */
+    
