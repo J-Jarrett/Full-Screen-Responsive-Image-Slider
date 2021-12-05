@@ -29,7 +29,7 @@ const prev = document.querySelector("#prev");
 
 // for use in auto-slide after we've done media queries in CSS:
 // const auto = false;
-const intervalTime = 5000;
+const intervalTime = 8000;
 let slideInterval;
     // we'll reset auto to true later; intervalTime assigned 5seconds; slideInterval is initialized for setting later.
 
