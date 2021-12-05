@@ -13,6 +13,10 @@
 // 2. 2 methods/functions to create: nextSlide, prevSlide
 // 3. Add button events
 
+// 4. Add an auto-slide - 2 parts to this:
+//  - first bit after event listeners: check if auto is true, if so run next slide at intervalTime (5000);
+//  - second, add auto-slide to button events, see comments there for more.
+// SET AUTO TO TRUE TO MAKE THIS WORK!!!!
 // =============================================================
 
 // 1. Grab all dom elements and assign them to vars
@@ -24,10 +28,14 @@ const next = document.querySelector("#next");
 const prev = document.querySelector("#prev");
 
 // for use in auto-slide after we've done media queries in CSS:
-const auto = false;
+// const auto = false;
 const intervalTime = 5000;
 let slideInterval;
     // we'll reset auto to true later; intervalTime assigned 5seconds; slideInterval is initialized for setting later.
+
+// after 4. auto-slide, reset this to true to make it work.
+const auto = true;
+
 
 
 // 2. 2 methods/functions to create: nextSlide, prevSlide
@@ -66,8 +74,42 @@ const prevSlide = () => {
         // not sure why this is here, perhaps to just make sure this class is removed?
 }
 
-// 3. Add button events
-// the event calls the function
-next.addEventListener("click", e=>nextSlide());
-prev.addEventListener("click", e=>prevSlide());
+// // 3. Add button events
+// // the event calls the function
+// next.addEventListener("click", e=>nextSlide());
+// prev.addEventListener("click", e=>prevSlide());
 
+// 4. Add an auto-slide - 2 parts to this:
+//  - first bit after event listeners: check if auto is true, if so run next slide at intervalTime (5000);
+//  - second, add auto-slide to button events, see comments there for more.
+
+
+//  - second, add auto-slide to button events, see comments there for more.
+
+next.addEventListener("click", e=>{
+    nextSlide();
+    if (auto) {
+        clearInterval(intervalTime);
+        setInterval(nextSlide, intervalTime);
+    }
+});
+prev.addEventListener("click", e=>{
+    prevSlide();
+    if (auto) {
+        clearInterval(intervalTime);
+        setInterval(nextSlide, intervalTime);
+    }
+});
+// what's this about?
+// so: if user has clicked the button for next/prev slide, code checks if auto is true; if true, it will reset the interval time before calling the next slide.
+// why: so if user clicks after 3 secs on one slide, it won't keep counting down and move on after 2 secs on the new screen user moved to. 
+
+
+//  - first bit after event listeners: check if auto is true, if so run next slide at intervalTime (5000);
+
+if (auto) {
+    setInterval(nextSlide, intervalTime);
+}
+// if auto is set to true, the interval before calling function nextSlide() will be the intervalTime assigned.
+
+// SET AUTO TO TRUE!! TO MAKE THIS WORK
