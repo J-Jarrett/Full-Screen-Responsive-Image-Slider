@@ -9,6 +9,8 @@
  */
 /* 6. Style  .slide.content */
 /* 7. Style buttons */
+/* 8. Add media queries to make it responsive */
+
 
 /* =============================== */
 
@@ -89,7 +91,7 @@ body {
 /*  Intent: want this text box to be at the bottom of the page, and slide in from off screen left to right, starting invisible, opacity 0, and only be visible, opacity 1, if the .slide also has a .current.
  */
 /* Method:
-    Position aboslute within slider, 70px from bottom of screen. If 600px wide, starts from -600px (this will take it off screen, so set left to 0 to work on styling first. 
+    Position absolute within slider, 70px from bottom of screen (** changed to 0 after media queries bit). If 600px wide, starts from -600px (this will take it off screen, so set left to 0 to work on styling first. 
     Give it a bg col & text col, some pad, bit of marg under header.
     Then change left to -600px & opacity to 0, invisible.
 =========
@@ -103,7 +105,7 @@ TEST by changing class .current to other slide divs to check.
 */
 .slide .content {
     position: absolute;
-    bottom: 70px;
+    bottom: 0px;
     left: -600px;
     opacity: 1;
     width: 600px;
@@ -158,4 +160,28 @@ and IT DIDN'T WORK - deleted space between button and #next, now it does
 
 /* Now it looks pretty. 
     We're going to add media queries a bit later, but for now let's got to JS and deal with the functionality: clicking through the slides, setting up auto slide show, etc. */
-    
+
+/* ==================================== */
+
+/* 8. Add media queries to make it responsive */
+
+/* Currently our content is 600px wide, so on any small screen it's going to be cut off.
+    Let's add a mediaquery for 500px or less, and make content same width as screen; 
+    let's have the content 'rise up' from bottom (from -300px, moves up 300px).
+*/
+
+@media(max-width: 500px) {
+    .slide .content {
+        bottom: -300px;
+        left: 0;
+        width: 100%;
+    }
+    .slide.current .content {
+        transform: translateY(-300px);
+    }
+}
+
+/* ALL DONE!
+
+    okay, it could be tweaked, but this is a bare bones 'how to' here.    
+*/
